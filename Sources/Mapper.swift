@@ -383,6 +383,24 @@ extension Mapper {
 		return nil
 	}
 	
+	/// Converts an Object to a JSON string with options of pretty formating and sorting (if iOS 11 or later)
+	public func toJSONString(_ object: N, prettyPrint: Bool, sortedKeys:Bool) -> String? {
+		//let JSONDict = toJSON(object)
+		print(">>> In to json string:")
+		print(object)
+		var options: JSONSerialization.WritingOptions = prettyPrint ? .prettyPrinted : []
+		if #available(iOSApplicationExtension 11.0, *), sortedKeys == true {
+			options.insert(.sortedKeys)
+		}
+		print(options)
+		if let JSON = Mapper.toJSONData(object, options: options) {
+			let temp = String(data: JSON, encoding: String.Encoding.utf8)
+			print(temp)
+			return temp
+		}
+		return nil
+	}
+	
 	/// Converts an Object to JSON data with options
 	public static func toJSONData(_ JSONObject: Any, options: JSONSerialization.WritingOptions) -> Data? {
 		if JSONSerialization.isValidJSONObject(JSONObject) {
