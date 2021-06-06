@@ -78,6 +78,11 @@ public extension BaseMappable {
 	func toJSONString(prettyPrint: Bool = false) -> String? {
 		return Mapper().toJSONString(self, prettyPrint: prettyPrint)
 	}
+	
+	/// Returns the JSON String for the object sorted if after iOS 11
+	func toJSONStringWithSorting(prettyPrint: Bool = false, sortedkeys: Bool = false) -> String? {
+		return Mapper().toJSONString(self, prettyPrint: prettyPrint, sortedKeys: sortedkeys)
+	}
 }
 
 public extension Array where Element: BaseMappable {
