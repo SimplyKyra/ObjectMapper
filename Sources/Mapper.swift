@@ -392,6 +392,10 @@ extension Mapper {
 		if #available(iOSApplicationExtension 11.0, *), sortedKeys == true {
 			options.insert(.sortedKeys)
 		}
+		if #available(macOS 10.13, *), sortedKeys == true {
+			options.insert(.sortedKeys)
+		}
+		
 		print(options)
 		if let JSON = Mapper.toJSONData(object, options: options) {
 			let temp = String(data: JSON, encoding: String.Encoding.utf8)
