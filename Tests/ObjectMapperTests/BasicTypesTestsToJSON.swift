@@ -573,4 +573,39 @@ class BasicTypesTestsToJSON: XCTestCase {
 		XCTAssertTrue((json["dictStringFloat"] as? [String:Float])?.count ?? 0 > 0)
 		XCTAssertEqual((json["dictStringString"] as? [String:String])?["string"], "string")
 	}
+	
+	func testSortedToJSON() {
+		let object = TestCollectionOfPrimitives()
+		object.dictStringString = ["string": "string"]
+		object.dictStringBool = ["string": false]
+		object.dictStringInt = ["string": 1]
+		object.dictStringDouble = ["string": 1.2]
+		object.dictStringFloat = ["string": 1.3]
+		
+		print("OBJECT: \(object)")
+		
+		print("HELLO WORLD")
+		
+		//let JSONString = Mapper().toJSONStringWithOptions(
+//		let JSONString = Mapper<_>.toJSONString(object, prettyPrint: true, sortedKeys:true)
+		let jsonString = Mapper<TestCollectionOfPrimitives>.toJSONString(object, prettyPrint: true, sortedKeys: true)
+		print("STRING: \(jsonString ?? "NOTHING")")
+//
+//
+//		print(JSONString)
+	}
+//	
+//	let value: Float = 1.001
+//	let object = BasicTypes()
+//	object.arrayFloat = [value]
+//	object.arrayFloatOptional = [value]
+//	object.arrayFloatImplicityUnwrapped = [value]
+//	
+//	let JSONString = Mapper().toJSONString(object, prettyPrint: true)
+//	let mappedObject = mapper.map(JSONString: JSONString!)
+//
+//	XCTAssertNotNil(mappedObject)
+//	XCTAssertEqual(mappedObject?.arrayFloat.first, value)
+//	XCTAssertEqual(mappedObject?.arrayFloatOptional?.first, value)
+//	XCTAssertEqual(mappedObject?.arrayFloatImplicityUnwrapped.first, value)
 }
